@@ -1,6 +1,0 @@
-2024-10-14 18:45:25,916 - root - INFO - predicting audio file: ./tmp_audios\1728902725.wav
-2024-10-14 18:45:45,213 - root - INFO - predicting audio file: ./tmp_audios\1728902745.wav
-2024-10-14 18:45:50,344 - root - INFO - predicting audio file: ./tmp_audios\1728902750.wav
-2024-10-14 18:46:14,586 - root - INFO - predicting audio file: ./tmp_audios\1728902774.wav
-2024-10-14 18:46:43,309 - root - INFO - predicting audio file: ./tmp_audios\1728902803.wav
-2024-10-14 18:46:58,674 - root - INFO - predicting audio file: ./tmp_audios\1728902818.wav

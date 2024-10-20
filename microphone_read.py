@@ -219,7 +219,7 @@ class MicrophoneReader(object):
                 
                 # 气流强度估计
                 airflow_intensity = estimate_airflow_intensity(segment)
-                # print('airflow_intensity:', airflow_intensity)
+                print('airflow_intensity:', airflow_intensity)
                 
                 # 若气流强度持续window_size个step都小于阈值，则将激活状态置为False，不再提取mfcc特征
                 if airflow_intensity > self.threshold:

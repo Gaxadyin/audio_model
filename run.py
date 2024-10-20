@@ -18,32 +18,34 @@ audio_dir = "./tmp_audios"
 # 若目录不存在，则创建目录
 if not os.path.exists(audio_dir):
     os.makedirs(audio_dir)
+    
+    
+    
 
 # 清空目录下的所有文件
 for file in os.listdir(audio_dir):
     os.remove(os.path.join(audio_dir, file))
-
 def stream_predict():
     print("start predict")
     while True:
         try:
             audio_bytes = reader.get_next_bytes()
-            # print(mfcc_ndarray)
-            if audio_bytes is not None:
-                # 保存临时文件，用于调试,文件名为当前时间戳
-                timestamp = str(int(time.time()))
-                audio_file = os.path.join(audio_dir, timestamp + ".wav")
-                reader.save_bytes(audio_bytes, audio_file)
-                # 批量预估音素
-                print("predicting audio file: ", audio_file)
-                logging.info("predicting audio file: " + audio_file)
-                preds = predicter.predict_audio(audio_file)
-                for pred in preds:
-                    print(pred,end=' ')
-                    # 将预估结果写入日志(log.txt)
-                    # logging.info(pred)
-            else:
-                break
+            # print(audio_bytes)
+            # if audio_bytes is not None:
+            #     # 保存临时文件，用于调试,文件名为当前时间戳
+            #     timestamp = str(int(time.time()))
+            #     audio_file = os.path.join(audio_dir, timestamp + ".wav")
+            #     reader.save_bytes(audio_bytes, audio_file)
+            #     # 批量预估音素
+            #     print("predicting audio file: ", audio_file)
+            #     logging.info("predicting audio file: " + audio_file)
+            #     preds = predicter.predict_audio(audio_file)
+            #     for pred in preds:
+            #         print(pred,end=' ')
+            #         # 将预估结果写入日志(log.txt)
+            #         # logging.info(pred)
+            # else:
+            #     break
         except Exception as e:
             print(e)
             logging.error(e)
