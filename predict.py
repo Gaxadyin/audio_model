@@ -208,11 +208,11 @@ class PhonemePredictor:
             int: 音素索引
         """
         # 首先计算音素概率
-        label_prob = self.pred_mfcc_prob(mfcc_np)
+        label_prob = self.predict_mfcc_np(mfcc_np)
         
         # 解码，得到最可能的音素序列
-        predicted_phoneme = self.simple_decode(label_prob)
-        return predicted_phoneme
+        # predicted_phoneme = self.simple_decode(label_prob)
+        return label_prob
     
 
     def pred_mfcc_prob(self, mfcc_np: np.ndarray) -> np.ndarray:
@@ -228,7 +228,8 @@ class PhonemePredictor:
             mfcc_np = mfcc_np.reshape(1, -1)
             
         # 对mfcc进行normalize
-        mfcc_np = (mfcc_np - self.mean) / self.std
+        # mfcc_np = (mfcc_np - self.mean) / self.std
+        mfcc_np = (mfcc_np - mfcc_np.mean(axis=0)) / mfcc_np.std(axis=0)
         
         self.historical_mfcc.append(mfcc_np)
         if len(self.historical_mfcc) > 2 * self.context + 1:
@@ -363,8 +364,10 @@ class PhonemePredictor:
         # 若采样率未指定，则默认为16000
         if sr is None:
             sr = 16000
+            
         
         audio_segments = load_audio_segments(audio_path, sr)
+        
         # 转换为mfcc np
         mfcc_np = extract_mfcc_features(segments=audio_segments, sr=sr, n_mfcc=13)
         predicted_phonemes = self.predict_mfcc_np(mfcc_np)
